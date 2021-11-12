@@ -24,6 +24,17 @@ module PeerGram
     config.load_defaults 6.1
     # This is set in apps generated with the --api flag, and removes session/cookie middleware
     config.api_only = true
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins 'http://localhost:4000'
+    
+    #     resource '*',
+    #       headers: :any,
+    #       methods: [:get, :post, :put, :patch, :delete, :options, :head],
+    #       credentials: true
+    #   end
+    # end
+    
 
     # ▾ Must add these lines! ▾
     # Adding back cookies and session middleware

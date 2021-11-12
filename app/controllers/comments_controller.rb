@@ -16,7 +16,8 @@ class CommentsController < ApplicationController
 
 
     def create 
-        @comment = Comment.new(Comment_params)
+        @comment = Comment.new(comment_params)
+        @comment.user_id = session[:user_id]  
         if @comment.save
             render json: @comment, status: 201
         else
@@ -32,6 +33,13 @@ class CommentsController < ApplicationController
         else
             render json: {error: "Product not found"}, status: 404
         end
+    end
+
+
+    private
+
+    def comment_params
+        params.permit(:content, :post_id)
     end
 
 end

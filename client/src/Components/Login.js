@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -13,14 +13,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
+import { Link as MuiLink } from '@mui/material';
+
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <MuiLink to="">
         Your Website
-      </Link>{' '}
+      </MuiLink>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -32,9 +34,9 @@ const theme = createTheme();
 export default function Login( { login, setLogin } ) {
  let history = useNavigate();
 
-  if (login !== "") {
-    history("/main");
-  }
+  // if (login !== "") {
+  //   history("/main");
+  // }
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,6 +44,7 @@ export default function Login( { login, setLogin } ) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({
         username: data.get('username'),
         password: data.get('password')
@@ -50,10 +53,17 @@ export default function Login( { login, setLogin } ) {
     fetch('http://localhost:3000/login', requestOptions)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      console.log("soup")
       setLogin(data.id)
-      history("/post")
-    });
+      if (data.id){
+        history("/main")
+      }
+      else{
+        alert("Invalid credentials")
+      }
+      
+    })
+    .catch((e) => console.error(e));
     // console.log({
     //   username: data.get('username'),
     //   password: data.get('password'),
@@ -113,12 +123,12 @@ export default function Login( { login, setLogin } ) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+                <MuiLink>
+                    Forgot Milk?
+                </MuiLink>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="signup">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

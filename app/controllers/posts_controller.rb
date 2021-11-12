@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     def index
-        @posts = Post.all
+        @posts = Post.order("created_at DESC")
 
         render json: @posts
     end
@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 
     def create 
         @post = Post.new(post_params)
+        @post.user_id = session[:user_id]  
         if @post.save
             render json: @post, status: 201
         else
@@ -43,12 +44,21 @@ class PostsController < ApplicationController
         end
     end
 
+    def user_posts
+        @posts = Post.where("user_id = :user_id", { user_id: session[:user_id]})
+        if @posts
+            render json: @posts
+        else
+            render json: {error: "post not found"}, status: 404
+        end
+    end
 
 
     private 
 
     def post_params
-        params.require(:image).permit(:caption, :user_id)
+        params.require(:image)
+        params.permit(:image, :caption)
     end
     def update_params
         params.permit(:caption, :image)

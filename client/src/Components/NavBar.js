@@ -8,17 +8,27 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from '@mui/material/TextField';
 import HomeIcon from '@mui/icons-material/Home';
 import AddBoxTwoToneIcon from '@mui/icons-material/AddBoxTwoTone';
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import { Link } from 'react-router-dom';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { Button } from '@mui/material'
+import ProfileMenu from './ProfileMenu';
+
 
 
 const useStyles = makeStyles((theme) => ({
+
     root: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-evenly",
+      justifyContent: "center",
       backgroundColor: "#fff",
       borderBottom: "1px solid rgba(var(--b6a,219,219,219),1)",
-      boxShadow: "0"
+      boxShadow: "0",
+      marginLeft: "-410px"
     }, 
     button: {
         marginLeft: "auto"
@@ -27,36 +37,107 @@ const useStyles = makeStyles((theme) => ({
       color: "black"
     },
     text: {
-      marginLeft: "100px"
     },
     div: {
-      display: "flex"
+      display: "flex",
+      width: "266px",
+      justifyContent: "flex-end"
     }
   }));
 
-export default function NavBar() {
+export default function NavBar({setLoggedIn, posts, setPosts}) {
+
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+  setOpen(true);
+};
+const handleSubmit = (event) => {
+  const data = new FormData(event.currentTarget)
+  const details = {
+    image: data.get("image"),
+    caption: data.get("caption")
+  }
+  event.preventDefault();
+  const update = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(details),
+  };
+  fetch(`http://localhost:3000/posts`, update)
+  .then(response => response.json())
+  .then(data => {
+    if (data.image){
+      handleClose()
+      setPosts([...posts, data])
+      console.log(data)
+    }
+    else{
+      // error message here...
+    }
+    
+  });
+};
+const handleClose = () => {
+  setOpen(false);
+};
     const classes = useStyles();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{boxShadow: 0}} >
+      <AppBar position="fixed" sx={{boxShadow: 0, backgroundColor: "#fff", borderBottom: "1px solid rgba(var(--b6a,219,219,219),1)"}} >
         <Toolbar variant="dense" className={classes.root} >
-          <Typography variant="h6" color="inherit" component="div" sx={{ marginLeft: "112px", color:"black"}}>
+          <Typography variant="h6" color="inherit" component="div" sx={{ color:"black", fontFamily: `"Lobster", cursive`, width:"360px"}}>
             PeerGram
           </Typography>
           <TextField id="outlined-basic" label="search" variant="outlined" size="small" />
           <div className={classes.div}>
+          <Link to="/main">
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <HomeIcon className={classes.icons}/>
           </IconButton>
-          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+          </Link>
+          <IconButton onClick={handleClickOpen} edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <AddBoxTwoToneIcon className={classes.icons}/>
           </IconButton>
-          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <AccountCircleRoundedIcon className={classes.icons}/>
-          </IconButton>
+          <ProfileMenu setLoggedIn={setLoggedIn}/>
+         
           </div>
         </Toolbar>
       </AppBar>
+      <Box  sx={{ mt: 1 }}>
+      <Dialog component="form" open={open} onClose={handleClose} onSubmit={handleSubmit} sx={{marginLeft: "-200px"}}>
+        <DialogTitle>Create Post</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Place your caption and image below!
+          </DialogContentText>
+          <TextField 
+            autoFocus
+            margin="dense"
+            id="image"
+            label="image"
+            name="image"
+            fullWidth
+            variant="standard"
+          />
+          <TextField 
+            autoFocus
+            margin="dense"
+            id="caption"
+            label="caption"
+            name="caption"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button type="submit">Submit</Button>
+        </DialogActions>
+      </Dialog>
+      </Box>
     </Box>
+    
   );
 }

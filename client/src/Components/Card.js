@@ -1,65 +1,54 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import CommentForm from './CommentForm';
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
-export default function Cards(post) {
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-  const posts = post.post
-  console.log(posts)
+export default function Cards(props) {
+
+
+
+  const post = props.post
+  console.log(post)
   return (
     
-    <Card variant="outlined" sx={{ maxWidth: 614, height: 766, marginBottom: "100px"}}>
+    <Card variant="outlined" sx={{ width: 614, marginBottom: "100px"}}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {posts.user.avatar}
-          </Avatar>
+          <Avatar alt="Remy Sharp" src={post.user.avatar} />
         }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title={posts.user.username}
-        subheader="September 14, 2016"
+        title={post.user.username}
+        subheader={post.created_at}
       />
       <CardMedia
         component="img"
         height="580"
-        image={posts.image}
+        image={post.image}
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-         {posts.caption}
+         {post.caption}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -70,6 +59,33 @@ export default function Cards(post) {
           <ShareIcon />
         </IconButton>
       </CardActions>
+      <List>
+              {post.comments.map((comment) => (
+                <div key={comment.id} sx={{color: "black"}}>
+                  <ListItem  alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar alt="Remy Sharp" src={comment.user.avatar} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={comment.user.username}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            {comment.content}
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </div>
+              ))}
+            </List>
+            <CommentForm comments={post.comments} post={post} />
     </Card>
   );
 }
