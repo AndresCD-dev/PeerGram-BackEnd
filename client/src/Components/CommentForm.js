@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CommentForm({comments, post}) {
+export default function CommentForm({comments, post, setComments}) {
   
   const classes = useStyles();
   
@@ -38,6 +38,7 @@ export default function CommentForm({comments, post}) {
     .then(response => response.json())
     .then(data => {
       if (data.content){
+        setComments(...comments, data)
         console.log(data)
       }
       else{

@@ -15,13 +15,22 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [formDetails, setFormDetails] = useState({})
   const [userInfo, setUserInfo] = useState({});
+  const [user, setUser] = useState({})
   const [posts, setPosts] = useState([])
+  const [comments, setComments] = useState([])
+  const [change, setChange] = useState([])
+  console.log(userInfo)
   useEffect(() => {
     fetch(`http://localhost:3000/posts`)
       .then((r) => r.json())
       .then(setPosts);
-  }, [])
+  }, [posts.length, comments.length])
 
+  useEffect(() => {
+    fetch(`http://localhost:3000/comments`)
+      .then((r) => r.json())
+      .then(setComments);
+  }, [comments.length])
 
   useEffect(() => {
     if (!userInfo.id){
@@ -60,13 +69,13 @@ function App() {
         credentials: 'include'})
       .then(resp => resp.json())
       .then(data => {
-        console.log(data)
+        setUser(data)
         setUserInfo({
           username: data.username,
           id: data.id
         })
       })
-    }, [loggedIn])
+    }, [loggedIn, change])
   return (
     <Router>
       
@@ -76,9 +85,9 @@ function App() {
       <Routes>
             <Route exact path='/' element={<Login login={loggedIn} setLogin={setLoggedIn} />} />
             <Route exact path='/signup' element={<SignUp setLogin={setLoggedIn}/>} />
-            <Route exact path='/main' element={<Post posts={posts}/>}/>
-            <Route exact path='/profile' element={<Profile posts={posts}/>}/>
-            <Route exact path='/edit' element={<EditProfile formDetails={formDetails} setFormDetails={setFormDetails}/>}/>
+            <Route exact path='/main' element={<Post posts={posts} setComments={setComments} comments={comments}/>}/>
+            <Route exact path='/profile' element={<Profile user={user}/>}/>
+            <Route exact path='/edit' element={<EditProfile formDetails={formDetails} setFormDetails={setFormDetails} change={change} setChange={setChange}/>}/>
       </Routes>
     </Fragment>
     </div>

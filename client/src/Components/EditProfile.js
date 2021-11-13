@@ -8,9 +8,10 @@ import { Divider } from '@mui/material';
 import { useState } from 'react';
 
 
-export default function EditProfile() {
+export default function EditProfile({change, setChange}) {
 
     const [content, setContent] = useState("")
+    
     function handleChange(e) {
         setContent(e.target.value)
     }
@@ -30,6 +31,7 @@ export default function EditProfile() {
         .then(response => response.json())
         .then(data => {
           if (data){
+            setChange(data)
             setContent("")
             alert("Changed Avatar Succesful")
             console.log(data)
@@ -82,6 +84,7 @@ export default function EditProfile() {
         .then(response => response.json())
         .then(data => {
           if (data){
+            setChange(data)
             setContent("")
             alert("Changed Username Succesful")
             console.log(data)
@@ -140,7 +143,7 @@ export default function EditProfile() {
         marginTop: "40px"
       }}
     >
-      <TextField fullWidth onSubmit={handleSubmit} onChange={handleChange} component="form" type="text" name="username" label="Username" id="fullWidth" />
+      <TextField fullWidth onSubmit={handleSubmit} onChange={handleChange} component="form" type="text" name="username" label="Username" id="fullWidth"/>
     </Box>
     <Typography variant="h7" sx={{marginTop:"40px"}}>
             Name
@@ -152,7 +155,7 @@ export default function EditProfile() {
         marginTop: "40px"
       }}
     >
-      <TextField fullWidth onSubmit={handleName} onChange={handleChange} component="form" type="text" name="name" label="Name" id="fullWidth" value={content} />
+      <TextField fullWidth onSubmit={handleName} onChange={handleChange} component="form" type="text" name="name" label="Name" id="fullWidth" />
     </Box>
     <Typography variant="h7" sx={{marginTop:"40px"}}>
             Avatar
@@ -164,7 +167,7 @@ export default function EditProfile() {
         marginTop: "40px"
       }}
     >
-      <TextField fullWidth onSubmit={handleAvatar} onChange={handleChange} component="form" type="text" name="avatar" label="Avatar Url" id="fullWidth" />
+      <TextField fullWidth onSubmit={handleAvatar} onChange={handleChange} component="form" type="text" name="avatar" label="Avatar Url" id="fullWidth"  />
     </Box>
     <Typography variant="h7" sx={{marginTop:"40px"}}>
             Bio

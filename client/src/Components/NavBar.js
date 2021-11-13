@@ -70,7 +70,6 @@ const handleSubmit = (event) => {
     if (data.image){
       handleClose()
       setPosts([...posts, data])
-      console.log(data)
     }
     else{
       // error message here...

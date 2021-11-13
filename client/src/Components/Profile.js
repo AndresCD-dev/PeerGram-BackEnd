@@ -30,6 +30,8 @@ const Profile = (props) => {
     const [bio, setBio] = useState()
     const classes = useStyles();
     let history = useNavigate();
+    // console.log(props.user)
+    const user = props.user
 
 
     function handleClick(e) {
@@ -48,8 +50,7 @@ const Profile = (props) => {
           })
           .then((r) => r.json())
           .then(setBio);
-      }, [])
-      console.log(bio)
+      }, [user])
 
     useEffect(() => {
         fetch(`http://localhost:3000/userposts`, {
@@ -64,31 +65,31 @@ const Profile = (props) => {
           .then((r) => r.json())
           .then(setProfile);
       }, [])
-      if (bio !== undefined) {  
+      if (bio !== undefined ) {  
     return (
         <>
         <Box sx={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "100px", marginRight: "380px"}}>
-        <Box sx={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+        <Box sx={{display: "flex", flexDirection: "row", justifyContent: "center", marginRight: "30px"}}>
             <Avatar
                 alt="Remy Sharp"
-                src={bio.user.avatar}
+                src={user.avatar}
                 sx={{ width: 150, height: 150, }}
             />
         </Box>
         <Box sx={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
             <Box sx={{display: "flex", flexDirection: "row", }}>
             <Typography variant="h4" gutterBottom component="div" sx={{paddingRight: "20px"}}>
-                {bio.user.username}
+                {user.username}
             </Typography>
             <IconButton onClick={handleClick} edge="start" color="inherit" aria-label="menu" sx={{ mr: 1}}>
             <SettingsIcon sx={{ width: "30px", height: "30px"}}/>
             </IconButton>
             </Box>
             <Box sx={{display: "flex", flexDirection: "row"}}>
-            <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "15px"}}>
+            <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "20px"}}>
                 {profile.length} Posts  
             </Typography>
-            <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "15px"}}>
+            <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "20px"}}>
                 {bio.followers} Followers
             </Typography>
             <Typography variant="h6" gutterBottom component="div">
@@ -109,7 +110,7 @@ const Profile = (props) => {
         <Box sx={{display: "flex", flexDirection: "row", justifyContent: "center", marginRight: "67px"}}>
         <ImageList sx={{ width: 935, height: 640 }} cols={3} rowHeight={293}>
             {profile.map((item) => (
-                <ImageListItem key={item.img} sx={{marginLeft: "15px"}}>
+                <ImageListItem key={item.id} sx={{marginLeft: "15px"}}>
                     <img
                         sx={{ width: 500, height: 450 }}
                         src={item.image}

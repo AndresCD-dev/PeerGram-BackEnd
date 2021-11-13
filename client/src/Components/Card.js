@@ -24,7 +24,6 @@ export default function Cards(props) {
 
 
   const post = props.post
-  console.log(post)
   return (
     
     <Card variant="outlined" sx={{ width: 614, marginBottom: "100px"}}>
@@ -85,7 +84,7 @@ export default function Cards(props) {
                 </div>
               ))}
             </List>
-            <CommentForm comments={post.comments} post={post} />
+            <CommentForm  post={post} setComments={props.setComments} comments={props.comments} />
     </Card>
   );
 }

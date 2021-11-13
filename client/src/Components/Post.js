@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 const Post = (props) => {
     const arrayPosts = props.posts
     const classes = useStyles();
-    console.log(arrayPosts)
     return (
         <div className={classes.root}>
             <Grid
@@ -44,7 +43,7 @@ const Post = (props) => {
             >
                 {arrayPosts.map((post) =>
                  <Grid item key={post.id} xs={12} sm={6} md={4}>
-                    <Cards post={post}  />
+                    <Cards post={post} setComments={props.setComments} comments={props.comments}  />
                  </Grid> )}
                     
             </Grid>
