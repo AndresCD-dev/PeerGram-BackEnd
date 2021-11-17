@@ -66,7 +66,19 @@ export default function EditProfile({change, setChange}) {
             // error message here...
           }
           
+          
         });
+        fetch(`http://localhost:3000/users`, update)
+        .then(response => response.json())
+        .then(data => {
+          if (data){
+            setChange(data)
+            setContent("")
+            console.log(data)
+          }
+          else{
+            // error message here...
+          }});
       };
       const handleSubmit = (event) => {
         const data = new FormData(event.currentTarget)

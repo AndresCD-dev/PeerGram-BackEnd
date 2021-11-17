@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
     # before_action :authorize, only: [:show]
-    # def show
-    #     @user = User.find(params[:id])
-    #     if @user
-    #         render json: @user
-    #     else
-    #         render json: {error: "User not found"}, status: 404
-    #     end
-    # end
+    def index
+        @users = User.all.shuffle
+        if @users
+            render json: @users
+        else
+            render json: {error: "User not found"}, status: 404
+        end
+    end
 
     def show
         user = User.find_by(id: params[:id])
@@ -42,6 +42,6 @@ class UsersController < ApplicationController
     end
 
     def update_params
-        params.permit(:username, :avatar)
+        params.permit(:username, :avatar, :name)
     end
 end

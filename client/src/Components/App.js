@@ -19,7 +19,6 @@ function App() {
   const [posts, setPosts] = useState([])
   const [comments, setComments] = useState([])
   const [change, setChange] = useState([])
-  console.log(userInfo)
   useEffect(() => {
     fetch(`http://localhost:3000/posts`)
       .then((r) => r.json())
@@ -45,7 +44,6 @@ function App() {
       })
       .then(resp => resp.json())
       .then(data => {
-        console.log(data)
         if (data.id){
           setUserInfo({
             username: data.username,
@@ -58,7 +56,6 @@ function App() {
   }, [userInfo.id])
 
   useEffect(() => {
-      console.log(loggedIn)
       fetch(`http://localhost:3000/user`, {
         method: "GET",
         headers: {
@@ -85,7 +82,7 @@ function App() {
       <Routes>
             <Route exact path='/' element={<Login login={loggedIn} setLogin={setLoggedIn} />} />
             <Route exact path='/signup' element={<SignUp setLogin={setLoggedIn}/>} />
-            <Route exact path='/main' element={<Post posts={posts} setComments={setComments} comments={comments}/>}/>
+            <Route exact path='/main' element={<Post posts={posts} setComments={setComments} comments={comments} user={user}/>}/>
             <Route exact path='/profile' element={<Profile user={user}/>}/>
             <Route exact path='/edit' element={<EditProfile formDetails={formDetails} setFormDetails={setFormDetails} change={change} setChange={setChange}/>}/>
       </Routes>

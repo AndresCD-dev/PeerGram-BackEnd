@@ -9,13 +9,13 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import CommentForm from './CommentForm';
+import DeleteMenu from './DeleteMenu';
 
 
 
@@ -32,9 +32,7 @@ export default function Cards(props) {
           <Avatar alt="Remy Sharp" src={post.user.avatar} />
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <DeleteMenu/>
         }
         title={post.user.username}
         subheader={post.created_at}
