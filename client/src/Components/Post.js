@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
     name: {
         display: "flex",
         flexDirection: "column"
+    },
+    stack: {
+        postion: "fixed"
     }
   }));
 
@@ -63,26 +66,25 @@ const Post = (props) => {
             >
                 {arrayPosts.map((post) =>
                  <Grid item key={post.id} xs={12} sm={6} md={4}>
-                    <Cards post={post} setComments={props.setComments} comments={props.comments}  />
+                    <Cards post={post} setComments={props.setComments} comments={props.comments} arrayPosts={arrayPosts} setPosts={props.setPosts} />
                  </Grid> )}
                     
             </Grid>
              <div className={classes.div}>
-                <Stack direction="column" spacing={2}>
+                <Stack direction="column" spacing={2} sx={{position: "fixed"}}>
                     <div className={classes.user}>
                     <Avatar alt="Remy Sharp" src={user.avatar} sx={{marginRight: "10px"}} />
                     <div className={classes.name}>
-                    <Typography>{user.username}</Typography>
-                    <Typography>{user.name}</Typography>
+                    <Typography sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", fontWeight: "500"}}>{user.username}</Typography>
+                    <Typography sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>{user.name}</Typography>
                     </div>
                     </div>
-                    <Typography>Suggestions For You.</Typography>
+                    <Typography sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>Suggestions For You.</Typography>
                     {allUsers.filter(allUsers => allUsers.id !== user.id).slice(0, 5).map(friends => (
                     <div className={classes.user}>
                     <Avatar alt="Travis Howard" src={friends.avatar} sx={{ width: 24, height: 24, marginRight: "10px" }}  />
                     <div className={classes.name}>
-                    <Typography>{friends.username}</Typography>
-                    <Typography>{friends.name}</Typography>
+                    <Typography variant="subtitle2"  sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", fontWeight: "500"}}>{friends.username}</Typography>
                     </div>
                     </div>
                     ))}

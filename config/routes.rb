@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/user", to: "sessions#show"
   get "/logout", to: "sessions#logout"
   get "/allusers", to: "users#index"
+  delete "/posts/:id", to: "posts#destroy"
 
   post "/signup", to: "users#create"
 end

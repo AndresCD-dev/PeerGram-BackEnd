@@ -8,15 +8,36 @@ import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function DeleteMenu() {
+
+export default function DeleteMenu(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (event) => {
     setOpen(false);
+    const update = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(),
+      };
+      fetch(`http://localhost:3000/posts/${props.post.id}`, update)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data)
+          if (!data.error){
+            fetch(`http://localhost:3000/posts`)
+            .then((r) => r.json())
+            .then(props.setPosts);
+          }
+        else{
+            alert("Wrong account can't delete post")
+        }
+        
+      });
   };
 
   return (

@@ -24,6 +24,9 @@ export default function Cards(props) {
 
 
   const post = props.post
+  const arrayPosts = props.arrayPosts
+  const timeArray = post.created_at.split("T")
+  console.log(timeArray[0])
   return (
     
     <Card variant="outlined" sx={{ width: 614, marginBottom: "100px"}}>
@@ -32,20 +35,34 @@ export default function Cards(props) {
           <Avatar alt="Remy Sharp" src={post.user.avatar} />
         }
         action={
-          <DeleteMenu/>
+          <DeleteMenu post={post} arrayPosts={arrayPosts} setPosts={props.setPosts}/>
         }
-        title={post.user.username}
-        subheader={post.created_at}
+        title={
+          <React.Fragment>
+          <Typography
+            component="span"
+            variant="body2"
+            color="textPrimary"
+            sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", marginRight: "420px", fontWeight: "500"}}
+          >
+            {post.user.username}
+          </Typography>
+        </React.Fragment>
+        }
       />
       <CardMedia
         component="img"
-        height="580"
+        height="767"
         image={post.image}
         alt="Paella dish"
+        sx={{height: "100%"}}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
          {post.caption}
+        </Typography>
+        <Typography variant="caption" color="text.secondary" sx={{marginRight: "510px"}}>
+         {timeArray[0]}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -71,6 +88,7 @@ export default function Cards(props) {
                             component="span"
                             variant="body2"
                             color="textPrimary"
+                            sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}
                           >
                             {comment.content}
                           </Typography>

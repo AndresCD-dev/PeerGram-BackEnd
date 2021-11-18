@@ -82,7 +82,7 @@ function App() {
       <Routes>
             <Route exact path='/' element={<Login login={loggedIn} setLogin={setLoggedIn} />} />
             <Route exact path='/signup' element={<SignUp setLogin={setLoggedIn}/>} />
-            <Route exact path='/main' element={<Post posts={posts} setComments={setComments} comments={comments} user={user}/>}/>
+            <Route exact path='/main' element={<Post setPosts={setPosts} posts={posts} setComments={setComments} comments={comments} user={user}/>}/>
             <Route exact path='/profile' element={<Profile user={user}/>}/>
             <Route exact path='/edit' element={<EditProfile formDetails={formDetails} setFormDetails={setFormDetails} change={change} setChange={setChange}/>}/>
       </Routes>

@@ -78,7 +78,7 @@ const Profile = (props) => {
         </Box>
         <Box sx={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
             <Box sx={{display: "flex", flexDirection: "row", }}>
-            <Typography variant="h4" gutterBottom component="div" sx={{paddingRight: "20px"}}>
+            <Typography variant="h4" gutterBottom component="div" sx={{fontWeight: "200", paddingRight: "20px", fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>
                 {user.username}
             </Typography>
             <IconButton onClick={handleClick} edge="start" color="inherit" aria-label="menu" sx={{ mr: 1}}>
@@ -86,21 +86,21 @@ const Profile = (props) => {
             </IconButton>
             </Box>
             <Box sx={{display: "flex", flexDirection: "row"}}>
-            <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "20px"}}>
+            <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "20px", fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>
                 {profile.length} Posts  
             </Typography>
-            <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "20px"}}>
+            <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "20px", fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>
                 {bio.followers} Followers
             </Typography>
-            <Typography variant="h6" gutterBottom component="div">
+            <Typography variant="h6" gutterBottom component="div"sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>
                 {bio.following} Following
             </Typography>
             </Box>
             <Box sx={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
-            <Typography variant="h6" gutterBottom component="div">
+            <Typography variant="h6" gutterBottom component="div"sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>
                 {bio.name}
             </Typography>
-            <Typography variant="h7" gutterBottom component="div">
+            <Typography variant="h7" gutterBottom component="div"sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>
                 {bio.bio}
             </Typography>
             </Box>

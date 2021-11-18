@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#fff",
       borderBottom: "1px solid rgba(var(--b6a,219,219,219),1)",
       boxShadow: "0",
-      marginLeft: "-410px"
+      marginLeft: "-180px"
     }, 
     button: {
         marginLeft: "auto"
@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
     div: {
       display: "flex",
       width: "266px",
-      justifyContent: "flex-end"
+      justifyContent: "flex-end",
+      marginLeft: "110px"
     }
   }));
 
@@ -85,7 +86,7 @@ const handleClose = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{boxShadow: 0, backgroundColor: "#fff", borderBottom: "1px solid rgba(var(--b6a,219,219,219),1)"}} >
         <Toolbar variant="dense" className={classes.root} >
-          <Typography variant="h6" color="inherit" component="div" sx={{ color:"black", fontFamily: `"Lobster", cursive`, width:"360px"}}>
+          <Typography variant="h6" color="inherit" component="div" sx={{ color:"black", fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", width:"360px", marginRight: "120px"}}>
             PeerGram
           </Typography>
           <TextField id="outlined-basic" label="search" variant="outlined" size="small" />

@@ -36,7 +36,7 @@ class PostsController < ApplicationController
 
     def destroy
         @post = Post.find(params[:id])
-        if @post
+        if @post.user_id == session[:user_id]
             @post.destroy
             render json: {message: "Product deleted"}, status: 200
         else
