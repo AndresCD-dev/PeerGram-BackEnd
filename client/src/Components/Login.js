@@ -50,7 +50,6 @@ export default function Login( { login, setLogin } ) {
     fetch('http://localhost:3000/login', requestOptions)
     .then(response => response.json())
     .then(data => {
-      console.log("soup")
       setLogin(data.id)
       if (data.id){
         history("/main")

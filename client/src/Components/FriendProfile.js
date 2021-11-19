@@ -9,9 +9,6 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { useEffect } from "react"
 import { useState } from "react"
 import CircularProgress from "@material-ui/core/CircularProgress";
-import SettingsIcon from '@mui/icons-material/Settings';
-import { IconButton } from '@mui/material';
-import {useNavigate} from 'react-router-dom';
 import { useParams } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,18 +26,10 @@ const useStyles = makeStyles((theme) => ({
 const FriendProfile = (props) => {
     let  { id }  = useParams();
     let idNumber = { id }.id;
-    console.log(idNumber)
     const [profile, setProfile] = useState([])
     const [bio, setBio] = useState()
     const classes = useStyles();
-    let history = useNavigate();
     // console.log(props.user)
-    const user = props.user
-
-
-    function handleClick(e) {
-        history("/edit")
-    }
 
     useEffect(() => {
         fetch(`http://localhost:3000/profiles/${idNumber}`, {
@@ -54,7 +43,7 @@ const FriendProfile = (props) => {
           })
           .then((r) => r.json())
           .then(setBio);
-      }, [user])
+      }, [idNumber])
 
     useEffect(() => {
         fetch(`http://localhost:3000/posts/${idNumber}`, {
@@ -68,8 +57,7 @@ const FriendProfile = (props) => {
           })
           .then((r) => r.json())
           .then(setProfile);
-      }, [])
-      console.log(bio)
+      }, [idNumber])
       if (bio !== undefined ) {  
     return (
         <>

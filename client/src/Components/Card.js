@@ -11,7 +11,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import CommentForm from './CommentForm';
@@ -19,7 +18,7 @@ import DeleteMenu from './DeleteMenu';
 import moment from "moment"
 import CommentsModal from './CommentsModal';
 import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
+
 
 const BootstrapDialog = styled(ListItem)(({ theme }) => ({
 
@@ -38,7 +37,6 @@ export default function Cards(props) {
 
   const post = props.post
   const arrayPosts = props.arrayPosts
-  const timeArray = post.created_at.split("T")
   const mappedArray = 
     post.comments.map((comment) => (
       <div key={comment.id} sx={{color: "black"}}>
@@ -73,7 +71,6 @@ export default function Cards(props) {
         </BootstrapDialog>
       </div>
     ))
-  console.log(timeArray[0])
   return (
     <Card variant="outlined" sx={{ width: 614, marginBottom: "100px"}}>
       <CardHeader

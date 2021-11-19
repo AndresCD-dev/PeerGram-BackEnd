@@ -54,7 +54,6 @@ const Post = (props) => {
           .then(setAllUsers);
       },[])
     const user = props.user
-    console.log(allUsers)
     const arrayPosts = props.posts
     const classes = useStyles();
     if (Object.keys(arrayPosts).length !== 0) {
