@@ -16,6 +16,19 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import CommentForm from './CommentForm';
 import DeleteMenu from './DeleteMenu';
+import moment from "moment"
+import CommentsModal from './CommentsModal';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+
+const BootstrapDialog = styled(ListItem)(({ theme }) => ({
+
+  '& .MuiListItemText-root': {
+    display: "flex",
+    alignItems: "center"
+    
+  }
+}));
 
 
 
@@ -26,9 +39,42 @@ export default function Cards(props) {
   const post = props.post
   const arrayPosts = props.arrayPosts
   const timeArray = post.created_at.split("T")
+  const mappedArray = 
+    post.comments.map((comment) => (
+      <div key={comment.id} sx={{color: "black"}}>
+        <BootstrapDialog alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt="Remy Sharp" src={comment.user.avatar} sx={{ width: 32, height: 32, marginLeft: "10px" }} />
+          </ListItemAvatar>
+          <ListItemText
+            primary={
+              <Typography
+              component="span"
+              variant="body2"
+              color="textPrimary"
+              sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", marginRight: "10px", fontWeight: "500"}}
+            >
+              {comment.user.username}
+            </Typography>
+            }
+            secondary={
+              <React.Fragment>
+                <Typography
+                  component="span"
+                  variant="body2"
+                  color="textPrimary"
+                  sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}
+                >
+                  {comment.content}
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </BootstrapDialog>
+      </div>
+    ))
   console.log(timeArray[0])
   return (
-    
     <Card variant="outlined" sx={{ width: 614, marginBottom: "100px"}}>
       <CardHeader
         avatar={
@@ -43,7 +89,7 @@ export default function Cards(props) {
             component="span"
             variant="body2"
             color="textPrimary"
-            sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", marginRight: "420px", fontWeight: "500"}}
+            sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", marginLeft: "-400px", fontWeight: "500"}}
           >
             {post.user.username}
           </Typography>
@@ -61,8 +107,8 @@ export default function Cards(props) {
         <Typography variant="body2" color="text.secondary">
          {post.caption}
         </Typography>
-        <Typography variant="caption" color="text.secondary" sx={{marginRight: "510px"}}>
-         {timeArray[0]}
+        <Typography variant="caption" color="text.secondary" sx={{marginRight: "490px"}}>
+         {moment(post.created_at).fromNow()}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -74,31 +120,7 @@ export default function Cards(props) {
         </IconButton>
       </CardActions>
       <List>
-              {post.comments.map((comment) => (
-                <div key={comment.id} sx={{color: "black"}}>
-                  <ListItem  alignItems="flex-start">
-                    <ListItemAvatar>
-                      <Avatar alt="Remy Sharp" src={comment.user.avatar} />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={comment.user.username}
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            component="span"
-                            variant="body2"
-                            color="textPrimary"
-                            sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}
-                          >
-                            {comment.content}
-                          </Typography>
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                </div>
-              ))}
+         {post.comments.length <= 3 ? mappedArray :<>{mappedArray.slice(0,3)} <CommentsModal post={post} image={post.image}/></>}
             </List>
             <CommentForm  post={post} setComments={props.setComments} comments={props.comments} />
     </Card>

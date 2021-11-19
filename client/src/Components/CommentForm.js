@@ -1,5 +1,6 @@
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/styles";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -20,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
 export default function CommentForm({comments, post, setComments}) {
   
   const classes = useStyles();
-  
+  const [comment, setComment] = useState("")
   const handleSubmit = (event) => {
-    const data = new FormData(event.currentTarget)
+    // const data = new FormData(event.currentTarget)
     const details = {
-      content: data.get("content"),
+      content: comment,
       post_id: post.id
     }
     event.preventDefault();
@@ -40,6 +41,8 @@ export default function CommentForm({comments, post, setComments}) {
       if (data.content){
         setComments(...comments, data)
         console.log(data)
+        setComment("")
+
       }
       else{
         // error message here...
@@ -52,16 +55,18 @@ export default function CommentForm({comments, post, setComments}) {
       <TextField
         className={classes.textfield}
         id="filled-full-width"
-        label="content"
+        label="Comment Here!"
         name="content"
+        variant="standard"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
         style={{ margin: 8 }}
-        placeholder="Write your comment here..."
+        placeholder="Add A Comment..."
         fullWidth
         margin="normal"
         InputLabelProps={{
           shrink: true,
         }}
-        variant="filled"
         type="text"
       />
     </form>

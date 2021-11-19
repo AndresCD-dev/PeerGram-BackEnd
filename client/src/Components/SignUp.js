@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -7,13 +6,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Link as MuiLink } from '@mui/material';
+import { Card, Link as MuiLink } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -27,8 +24,6 @@ function Copyright(props) {
     </Typography>
   );
 }
-
-const theme = createTheme();
 
 export default function SignUp({ setLogin }) {
   let history = useNavigate();
@@ -75,26 +70,24 @@ export default function SignUp({ setLogin }) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <Box sx={{paddingBottom: "220px", paddingTop: "50px"}}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <Box
+        <Card
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            marginTop: "100px",
+            padding: "20px 20px 50px 20px"
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
+          <Typography component="h1" variant="h5" sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", fontWeight: "500"}}>
+            PeerGram
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
               <TextField
                 margin="normal"
                 required
@@ -122,7 +115,7 @@ export default function SignUp({ setLogin }) {
                 fullWidth
                 name="password_confirmation"
                 label="Confirm Password"
-                type="password_confirmation"
+                type="password"
                 id="password_confirmation"
                 autoComplete="password_confirmation"
               />
@@ -155,9 +148,9 @@ export default function SignUp({ setLogin }) {
               </Grid>
             </Grid>
           </Box>
-        </Box>
+        </Card>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    </Box>
   );
 }

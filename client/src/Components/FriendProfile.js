@@ -12,6 +12,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import SettingsIcon from '@mui/icons-material/Settings';
 import { IconButton } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
+import { useParams } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -25,7 +26,10 @@ const useStyles = makeStyles((theme) => ({
   
  
 
-const Profile = (props) => {
+const FriendProfile = (props) => {
+    let  { id }  = useParams();
+    let idNumber = { id }.id;
+    console.log(idNumber)
     const [profile, setProfile] = useState([])
     const [bio, setBio] = useState()
     const classes = useStyles();
@@ -39,7 +43,7 @@ const Profile = (props) => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/profiles`, {
+        fetch(`http://localhost:3000/profiles/${idNumber}`, {
             method: "GET",
             headers: {
               'Accept':  'application/json',
@@ -53,7 +57,7 @@ const Profile = (props) => {
       }, [user])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/userposts`, {
+        fetch(`http://localhost:3000/posts/${idNumber}`, {
             method: "GET",
             headers: {
               'Accept':  'application/json',
@@ -65,6 +69,7 @@ const Profile = (props) => {
           .then((r) => r.json())
           .then(setProfile);
       }, [])
+      console.log(bio)
       if (bio !== undefined ) {  
     return (
         <>
@@ -72,18 +77,15 @@ const Profile = (props) => {
         <Box sx={{display: "flex", flexDirection: "row", justifyContent: "center", marginRight: "30px"}}>
             <Avatar
                 alt="Remy Sharp"
-                src={user.avatar}
+                src={bio.user.avatar}
                 sx={{ width: 150, height: 150, }}
             />
         </Box>
         <Box sx={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
             <Box sx={{display: "flex", flexDirection: "row", }}>
             <Typography variant="h4" gutterBottom component="div" sx={{fontWeight: "200", paddingRight: "20px", fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>
-                {user.username}
+                {bio.user.username}
             </Typography>
-            <IconButton onClick={handleClick} edge="start" color="inherit" aria-label="menu" sx={{ mr: 1}}>
-            <SettingsIcon sx={{ width: "30px", height: "30px"}}/>
-            </IconButton>
             </Box>
             <Box sx={{display: "flex", flexDirection: "row"}}>
             <Typography variant="h6" gutterBottom component="div" sx={{marginRight: "20px", fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif"}}>
@@ -133,4 +135,4 @@ const Profile = (props) => {
       }
 }
 
-export default Profile
+export default FriendProfile

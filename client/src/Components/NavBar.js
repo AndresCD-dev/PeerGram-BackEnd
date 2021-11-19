@@ -89,7 +89,7 @@ const handleClose = () => {
           <Typography variant="h6" color="inherit" component="div" sx={{ color:"black", fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", width:"360px", marginRight: "120px"}}>
             PeerGram
           </Typography>
-          <TextField id="outlined-basic" label="search" variant="outlined" size="small" />
+          <TextField id="outlined-basic" label="Search" variant="outlined" size="small" />
           <div className={classes.div}>
           <Link to="/main">
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
@@ -115,7 +115,7 @@ const handleClose = () => {
             autoFocus
             margin="dense"
             id="image"
-            label="image"
+            label="Image Url"
             name="image"
             fullWidth
             variant="standard"
@@ -124,7 +124,7 @@ const handleClose = () => {
             autoFocus
             margin="dense"
             id="caption"
-            label="caption"
+            label="Caption"
             name="caption"
             type="text"
             fullWidth

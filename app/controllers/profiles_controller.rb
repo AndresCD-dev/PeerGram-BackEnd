@@ -8,6 +8,15 @@ class ProfilesController < ApplicationController
         end
     end
 
+    def show
+        @profile = Profile.find_by(id: params[:id])
+        if @profile
+        render json: @profile
+        else
+            render json: {error: "post not found"}, status: 404
+        end
+    end
+
     def update
         @profile = Profile.find_by("user_id = :user_id", { user_id: session[:user_id]})
         if @profile

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -8,12 +7,11 @@ import Checkbox from '@mui/material/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
 import { Link as MuiLink } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
 
 
 function Copyright(props) {
@@ -29,7 +27,6 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
 
 export default function Login( { login, setLogin } ) {
  let history = useNavigate();
@@ -71,22 +68,34 @@ export default function Login( { login, setLogin } ) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+    <Box sx={{display: "flex", justifyContent: "space-around", paddingBottom: "320px"}}>
+      <Box component="main" maxWidth="xs" sx={{display: "flex", maxWidth: "935px", justifyContent: "space-between", alignItems: "center", flexDirection: "row"}}>
         <CssBaseline />
-        <Box
+        <Box sx={{width: "100%", height: "618px", marginTop: "145px"}}>
+          <Card sx={{marginRight: "80px"}}>
+            <CardMedia 
+            component="img"
+            height="618"
+            image="https://www.instagram.com/static/images/homepage/screenshot1.jpg/d6bf0c928b5a.jpg"
+            alt="Paella dish"
+            sx={{height: "100%", width: "100%"}}/>
+          </Card>
+        </Box>
+        <Box>
+        <Card
+        variant="outlined"
           sx={{
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            width: '350px',
+            height: "420px",
+            padding: "40px 30px 0px 30px"
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+          <Typography component="h1" variant="h5" sx={{fontFamily: "-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif", fontWeight: "500"}}>
+            PeerGram
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
@@ -97,6 +106,7 @@ export default function Login( { login, setLogin } ) {
               label="Username"
               name="username"
               autoComplete="username"
+              size="small"
               autoFocus
             />
             <TextField
@@ -107,6 +117,7 @@ export default function Login( { login, setLogin } ) {
               label="Password"
               type="password"
               id="password"
+              size="small"
               autoComplete="current-password"
             />
             <FormControlLabel
@@ -134,9 +145,11 @@ export default function Login( { login, setLogin } ) {
               </Grid>
             </Grid>
           </Box>
-        </Box>
+        </Card>
         <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+        </Box>
+        
+      </Box>
+    </Box>
   );
 }

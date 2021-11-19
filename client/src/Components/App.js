@@ -9,6 +9,7 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import NavBar from "./NavBar";
 import Profile from "./Profile";
 import EditProfile from "./EditProfile";
+import FriendProfile from "./FriendProfile";
 
 
 function App() {
@@ -82,9 +83,10 @@ function App() {
       <Routes>
             <Route exact path='/' element={<Login login={loggedIn} setLogin={setLoggedIn} />} />
             <Route exact path='/signup' element={<SignUp setLogin={setLoggedIn}/>} />
-            <Route exact path='/main' element={<Post setPosts={setPosts} posts={posts} setComments={setComments} comments={comments} user={user}/>}/>
+            <Route exact path='/main' element={<Post setPosts={setPosts} posts={posts} setComments={setComments} comments={comments} user={user} loggedIn={loggedIn}/>}/>
             <Route exact path='/profile' element={<Profile user={user}/>}/>
             <Route exact path='/edit' element={<EditProfile formDetails={formDetails} setFormDetails={setFormDetails} change={change} setChange={setChange}/>}/>
+            <Route exact path='/friend/:id' element={<FriendProfile user={user}/>}/>
       </Routes>
     </Fragment>
     </div>
