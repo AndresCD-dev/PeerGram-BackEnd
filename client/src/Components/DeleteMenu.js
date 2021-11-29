@@ -24,12 +24,12 @@ export default function DeleteMenu(props) {
         credentials: 'include',
         body: JSON.stringify(),
       };
-      fetch(`http://localhost:3000/posts/${props.post.id}`, update)
+      fetch(`hhttps://peer-gram.herokuapp.com/posts/${props.post.id}`, update)
       .then(response => response.json())
       .then(data => {
           console.log(data)
           if (!data.error){
-            fetch(`http://localhost:3000/posts`)
+            fetch(`hhttps://peer-gram.herokuapp.com/posts`)
             .then((r) => r.json())
             .then(props.setPosts);
           }

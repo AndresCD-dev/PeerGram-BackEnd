@@ -65,7 +65,7 @@ const handleSubmit = (event) => {
     credentials: 'include',
     body: JSON.stringify(details),
   };
-  fetch(`http://localhost:3000/posts`, update)
+  fetch(`https://peer-gram.herokuapp.com/posts`, update)
   .then(response => response.json())
   .then(data => {
     if (data.image){

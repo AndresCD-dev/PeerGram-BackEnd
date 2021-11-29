@@ -21,20 +21,20 @@ function App() {
   const [comments, setComments] = useState([])
   const [change, setChange] = useState([])
   useEffect(() => {
-    fetch(`http://localhost:3000/posts`)
+    fetch(`https://peer-gram.herokuapp.com/posts`)
       .then((r) => r.json())
       .then(setPosts);
   }, [posts.length, comments.length])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/comments`)
+    fetch(`https://peer-gram.herokuapp.com/comments`)
       .then((r) => r.json())
       .then(setComments);
   }, [comments.length])
 
   useEffect(() => {
     if (!userInfo.id){
-      fetch(`http://localhost:3000/user`, {
+      fetch(`https://peer-gram.herokuapp.com/user`, {
         method: "GET",
         headers: {
           'Accept':  'application/json',
@@ -57,7 +57,7 @@ function App() {
   }, [userInfo.id])
 
   useEffect(() => {
-      fetch(`http://localhost:3000/user`, {
+      fetch(`https://peer-gram.herokuapp.com/user`, {
         method: "GET",
         headers: {
           'Accept':  'application/json',

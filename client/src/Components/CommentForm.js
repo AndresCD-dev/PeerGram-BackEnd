@@ -35,7 +35,7 @@ export default function CommentForm({comments, post, setComments}) {
       credentials: 'include',
       body: JSON.stringify(details),
     };
-    fetch(`http://localhost:3000/comments`, update)
+    fetch(`https://peer-gram.herokuapp.com/comments`, update)
     .then(response => response.json())
     .then(data => {
       if (data.content){

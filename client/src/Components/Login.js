@@ -47,7 +47,7 @@ export default function Login( { login, setLogin } ) {
         password: data.get('password')
       })
     };
-    fetch('http://localhost:3000/login', requestOptions)
+    fetch('https://peer-gram.herokuapp.com/login', requestOptions)
     .then(response => response.json())
     .then(data => {
       setLogin(data.id)

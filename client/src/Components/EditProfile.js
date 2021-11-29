@@ -38,7 +38,7 @@ export default function EditProfile({change, setChange}) {
           credentials: 'include',
           body: JSON.stringify(user),
         };
-        fetch(`http://localhost:3000/profiles`, update)
+        fetch(`https://peer-gram.herokuapp.com/profiles`, update)
         .then(response => response.json())
         .then(data => {
           if (data){
@@ -52,7 +52,7 @@ export default function EditProfile({change, setChange}) {
           
           
         });
-        fetch(`http://localhost:3000/users`, patch)
+        fetch(`https://peer-gram.herokuapp.com/users`, patch)
         .then(response => response.json())
         .then(data => {
           if (data){

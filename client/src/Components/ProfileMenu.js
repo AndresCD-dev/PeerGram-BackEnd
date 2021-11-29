@@ -33,7 +33,7 @@ export default function ProfileMenu({setLoggedIn}) {
   const handleLogout = (event) => {
     event.preventDefault();
     handleClose()
-    fetch(`http://localhost:3000/logout`,{
+    fetch(`https://peer-gram.herokuapp.com/logout`,{
     credentials: 'include'})
     .then(resp => resp.json())
     .then(data => {

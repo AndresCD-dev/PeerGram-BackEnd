@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const Post = (props) => {
     const [allUsers, setAllUsers] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:3000/allusers`)
+        fetch(`https://peer-gram.herokuapp.com/allusers`)
           .then((r) => r.json())
           .then(setAllUsers);
       },[])

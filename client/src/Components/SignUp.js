@@ -44,7 +44,7 @@ export default function SignUp({ setLogin }) {
         credentials: 'include',
         body: JSON.stringify(details)
       };
-      fetch('http://localhost:3000/signup', requestOptions)
+      fetch('https://peer-gram.herokuapp.com/signup', requestOptions)
       .then(response => response.json())
       .then(data => {
         console.log(data)

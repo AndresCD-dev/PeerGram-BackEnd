@@ -39,7 +39,7 @@ const Profile = (props) => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/profiles`, {
+        fetch(`https://peer-gram.herokuapp.com/profiles`, {
             method: "GET",
             headers: {
               'Accept':  'application/json',
@@ -53,7 +53,7 @@ const Profile = (props) => {
       }, [user])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/userposts`, {
+        fetch(`https://peer-gram.herokuapp.com/userposts`, {
             method: "GET",
             headers: {
               'Accept':  'application/json',

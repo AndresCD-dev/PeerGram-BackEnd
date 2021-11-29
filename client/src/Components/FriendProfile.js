@@ -32,7 +32,7 @@ const FriendProfile = (props) => {
     // console.log(props.user)
 
     useEffect(() => {
-        fetch(`http://localhost:3000/profiles/${idNumber}`, {
+        fetch(`https://peer-gram.herokuapp.com/profiles/${idNumber}`, {
             method: "GET",
             headers: {
               'Accept':  'application/json',
@@ -46,7 +46,7 @@ const FriendProfile = (props) => {
       }, [idNumber])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/posts/${idNumber}`, {
+        fetch(`https://peer-gram.herokuapp.com/posts/${idNumber}`, {
             method: "GET",
             headers: {
               'Accept':  'application/json',
