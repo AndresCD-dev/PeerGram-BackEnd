@@ -17,7 +17,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <MuiLink>
-        Your Website
+        PeerGram
       </MuiLink>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -138,7 +138,7 @@ export default function SignUp({ setLogin }) {
             <Grid container justifyContent="flex-end">
             <Grid item xs>
                 <MuiLink>
-                    Forgot Milk?
+                    Forgot?
                 </MuiLink>
               </Grid>
               <Grid item>

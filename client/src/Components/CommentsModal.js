@@ -80,7 +80,7 @@ export default function CommentsModal(props) {
 
   return (
     <div>
-      <Button variant="text" onClick={handleClickOpen}>
+      <Button variant="text" onClick={handleClickOpen} style={{color: "grey"}}>
         View All Comments
       </Button>
       <BootstrapDialog

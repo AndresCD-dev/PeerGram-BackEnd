@@ -104,7 +104,7 @@ export default function Cards(props) {
         <Typography variant="body2" color="text.secondary">
          {post.caption}
         </Typography>
-        <Typography variant="caption" color="text.secondary" sx={{marginRight: "490px"}}>
+        <Typography variant="caption" color="text.secondary" sx={{marginRight: "470px"}}>
          {moment(post.created_at).fromNow()}
         </Typography>
       </CardContent>

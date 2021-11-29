@@ -100,7 +100,7 @@ export default function EditProfile({change, setChange}) {
        <Typography variant="h7" sx={{marginRight: "40px"}}>
             Name:
         </Typography>
-      <TextField fullWidth value={content} onChange={(e) => setContent(e.target.value)} size="small"  type="text" name="username" label="Username" id="fullWidth"/>
+      <TextField fullWidth value={content} onChange={(e) => setContent(e.target.value)} size="small"  type="text" name="name" label="Name" id="fullWidth"/>
     </Box>
     <Box
       sx={{
@@ -113,7 +113,7 @@ export default function EditProfile({change, setChange}) {
        <Typography variant="h7" sx={{marginRight: "61px"}}>
             Bio:
         </Typography>
-      <TextField fullWidth value={bio}  onChange={(e) => setBio(e.target.value)} size="small"  type="text" name="username" label="Username" id="fullWidth"/>
+      <TextField fullWidth value={bio}  onChange={(e) => setBio(e.target.value)} size="small"  type="text" name="bio" label="Bio" id="fullWidth"/>
     </Box>
     <Box
       sx={{
@@ -126,7 +126,7 @@ export default function EditProfile({change, setChange}) {
        <Typography variant="h7" sx={{marginRight: "38px"}}>
             Avatar:
         </Typography>
-      <TextField fullWidth value={avatar}  onChange={(e) => setAvatar(e.target.value)} size="small" type="text" name="username" label="Username" id="fullWidth"/>
+      <TextField fullWidth value={avatar}  onChange={(e) => setAvatar(e.target.value)} size="small" type="text" name="avatar" label="Avatar" id="fullWidth"/>
     </Box>
     <Button variant="text" size="large" onClick={handleSubmit} >
           Submit
