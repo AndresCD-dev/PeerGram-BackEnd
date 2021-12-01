@@ -19,24 +19,24 @@ export default function DeleteMenu(props) {
   const handleClose = (event) => {
     setOpen(false);
     const update = {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(),
-      };
-      fetch(`hhttps://peer-gram.herokuapp.com/posts/${props.post.id}`, update)
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(),
+    };
+    fetch(`https://peer-gram.herokuapp.com/posts/${props.post.id}`, update)
       .then(response => response.json())
       .then(data => {
-          console.log(data)
-          if (!data.error){
-            fetch(`hhttps://peer-gram.herokuapp.com/posts`)
+        console.log(data)
+        if (!data.error) {
+          fetch(`https://peer-gram.herokuapp.com/posts`)
             .then((r) => r.json())
             .then(props.setPosts);
-          }
-        else{
-            alert("Wrong account can't delete post")
         }
-        
+        else {
+          alert("Wrong account can't delete post")
+        }
+
       });
   };
 
